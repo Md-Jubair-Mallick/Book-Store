@@ -12,7 +12,7 @@ const bookSchema = new Schema({
     report: {type: String, required: true},
     comments: {type: String, required: true},
     date: {type: Date, required: true, default: Date.now()},
-    viwes:{type: Number, required: true, default: 1},
-    download:{type: Number, required: true, default: 0}
+    views:{type: Number, required: true, default: 1},
+    downloads:{type: Number, required: true, default: 0}
 })
 export default mongoose.model('Books', bookSchema)
