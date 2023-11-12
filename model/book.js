@@ -13,6 +13,7 @@ const bookSchema = new Schema({
     comments: {type: String, required: true},
     date: {type: Date, required: true, default: Date.now()},
     views:{type: Number, required: true, default: 1},
-    downloads:{type: Number, required: true, default: 0}
+    downloads:{type: Number, required: true, default: 0},
+    likes: {type: Number, required : true, default: 0},
 })
 export default mongoose.model('Books', bookSchema)
