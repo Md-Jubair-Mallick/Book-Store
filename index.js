@@ -1,3 +1,4 @@
+import bookRouter from './router/book.js'
 import express from 'express'
 import mongoose from 'mongoose'
 import cors from 'cors'
@@ -5,20 +6,26 @@ import 'dotenv/config'
 const app = express()
 const port = process.env.PORT
 
-app.use(cors)
-app.use(express.json())
+app.use(cors())
 app.use(express.urlencoded({ extended : true }))
+app.use(express.json())
 app.disable('x-powered-by') //less hacker know about our stack
 
+app.use('/books', bookRouter)
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+  })
+
 /** mongodb & express server */
-async() => {
+const main = async() => {
     try {
         await mongoose.connect(process.env.MONGO_URI)
         console.log('database is connected')
-        app.listen(port, ()=>{
-            console.log(`server is runing athttp://localhost:${port}`)
-        })
     } catch (error) {
         console.log(error)
     }
 }
+main()
+app.listen(port, ()=>{
+    console.log(`server is runing at http://localhost:${port}`)
+})
