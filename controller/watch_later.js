@@ -2,10 +2,18 @@ import WL from '../model/watch_later.js';
 
 const add = async(req, res)=>{
     try {
-        const wl = new WL(req.body)
-        const wl_ = await wl.save()
-        // res.status(201).json('book is added successfully')
-        res.status(201).json(wl_)
+        const userId = req.body.user
+        const bookId = req.body.book
+        let query = WL.find({user : userId})
+        query = await query.find({book : bookId})
+
+        if(query.length === 0){
+            const wl = new WL(req.body)
+            await wl.save()
+            res.status(201).json('book is added successfully')
+        }   else{
+            res.status(201).json('already added')
+        }
     } catch (error) {
         res.status(400).json('ctrl_watch_later_add => ' + error)
     }
