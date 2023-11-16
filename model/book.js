@@ -16,4 +16,4 @@ const bookSchema = new Schema({
     downloads:{type: Number, required: true, default: 0},
     likes: {type: Number, required : true, default: 0},
 })
-export default mongoose.model('Books', bookSchema)
+export default mongoose.model('Book', bookSchema)
